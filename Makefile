@@ -17,7 +17,7 @@ PACKAGE="mkluv-test"
 # The main dealio. Should handle most situations nicely.
 all:
 	@$(foreach i,$(DEPNAMES),test -d $i || $(MAKE) init;)
-	@$(foreach i,$(HG_DEPNAMES),test -d $i || $(MAKE) init;)
+	@$(foreach i,$(HG_DEPNAMES),test -d $i || $(MAKE) hg_init;)
 
 	@$(MAKE) update
 	@echo
