@@ -5,6 +5,7 @@
 
 # The name of the final .love zip file.
 PACKAGE="mkluv-test"
+VERSION="-`git rev-parse --short HEAD`"
 
 # Add single dependencies using this format. Kinda like cargo's TOML.
 #DEPNAMES += "hump"
@@ -40,7 +41,7 @@ update:
 hug:
 	@mkdir -p build
 	@echo "Grabbing and hugging (compressing) Lua files..."
-	@find . -name '*.lua' -exec zip -9 build/$(PACKAGE).love {} \;
+	@find . -name '*.lua' -exec zip -9 build/$(PACKAGE)$(VERSION).love {} \;
 
 	@echo -e "\nDone!"
 
@@ -55,7 +56,7 @@ vaporize: clean
 
 # Run. Runrunrun.
 run:
-	test -e build/$(PACKAGE).love || $(MAKE)
-	love build/$(PACKAGE).love
+	$(MAKE) hug
+	love build/$(PACKAGE)$(VERSION).love
 
 .PHONY: all init hg_init update hug clean vaporize run
